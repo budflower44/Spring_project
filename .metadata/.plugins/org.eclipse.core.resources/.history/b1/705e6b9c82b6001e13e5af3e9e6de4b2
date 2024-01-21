@@ -1,0 +1,7 @@
+package com.myweb.www.repository;
+
+public interface MemberDAO {
+
+	int emailCheck(String email);
+
+}

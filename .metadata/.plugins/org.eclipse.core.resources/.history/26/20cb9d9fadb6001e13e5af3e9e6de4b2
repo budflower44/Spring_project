@@ -1,0 +1,54 @@
+package com.myweb.www.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.myweb.www.security.MemberVO;
+import com.myweb.www.service.MemberService;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequiredArgsConstructor
+@RequestMapping("/member/**")
+@Controller
+public class MemberController {
+	
+	private final MemberService msv;
+	private final BCryptPasswordEncoder bcEncoder;
+	
+	@GetMapping("/register")
+	public void registerPage() {}
+	
+	@GetMapping(value = "/emailCheck/{email}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> emailCheck(@PathVariable("email") String email){
+		MemberVO mvo = msv.emailCheck(email);
+		return (mvo == null) ? new ResponseEntity<String>("1", HttpStatus.OK) : 
+			new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@PostMapping("/register")
+	public String register(MemberVO mvo) {
+		mvo.setPwd(bcEncoder.encode(mvo.getPwd()));
+		msv.insert(mvo);
+		return "index";
+	}
+	
+	@GetMapping("/login")
+	public void loginPage() {}
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,13 @@
+package com.myweb.www.repository;
+
+import com.myweb.www.security.MemberVO;
+
+public interface MemberDAO {
+
+	MemberVO emailCheck(String email);
+
+	MemberVO insert(MemberVO mvo);
+
+	MemberVO insertAuth(String email);
+
+}

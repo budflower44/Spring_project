@@ -1,0 +1,30 @@
+package com.myweb.www.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString
+@Setter
+@Getter
+public class PagingVO {
+	
+	private int pageNo;
+	private int qty;
+	
+	public PagingVO() {
+		this.pageNo = 1;
+		this.qty = 5;
+	}
+	
+	public PagingVO(int pageNo, int qty) {
+		this.pageNo = pageNo;
+		this.qty = qty;
+	}
+	
+	//시작 번지 구하기
+	public int getPageStart() {
+		return (int)Math.ceil((double)this.pageNo/10);
+	}
+	
+}

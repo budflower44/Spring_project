@@ -1,0 +1,24 @@
+package com.myweb.www;
+
+import javax.inject.Inject;
+
+import com.myweb.www.domain.BoardVO;
+import com.myweb.www.repository.BoardDAO;
+
+public class BoardTest {
+	
+	@Inject
+	private BoardDAO bdao;
+	
+	public void insertBoard() {
+		for(int i=0; i<300; i++) {
+			BoardVO bvo = new BoardVO();
+			bvo.setTitle("Test Title"+i);
+			bvo.setWriter("test");
+			bvo.setContent("Test Content"+i+" 입니다.");
+			bdao.insert(bvo);
+		}
+	}
+	
+
+}

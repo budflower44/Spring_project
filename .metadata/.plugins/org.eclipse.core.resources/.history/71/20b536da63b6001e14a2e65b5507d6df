@@ -1,0 +1,85 @@
+--2024-01-17
+--root 계정으로 DB 생성, User 생성
+--db 생성 구문
+create database mywebdb;
+--user 생성 구문
+create user 'mywebUser'@'localhost' identified by 'mysql';
+--user 권한 부여
+grant all privileges on mywebdb.* to 'mywebUser'@'localhost' with grant option;
+--권한 설정 완료
+flush privileges;
+
+--2024-01-17
+mysql> create table board(
+    -> bno bigint not null auto_increment,
+    -> title varchar(200) not null,
+    -> writer varchar(100) not null,
+    -> content text not null,
+    -> reg_at datetime default now(),
+    -> mod_at datetime default now(),
+    -> read_count int default 0,
+    -> cmt_qty int default 0,
+    -> has_file int default 0,
+    -> primary key(bno));
+    
+--2024-01-18
+mysql> create table comment(
+    -> cno bigint auto_increment,
+    -> bno bigint not null,
+    -> writer varchar(100) not null,
+    -> content text not null,
+    -> reg_at datetime default now(),
+    -> mod_at datetime default now(),
+    -> primary key(cno));
+
+--2024-01-18
+mysql> create table file(
+    -> uuid varchar(256) not null,
+    -> save_dir varchar(256) not null,
+    -> file_name varchar(256) not null,
+    -> file_type tinyint(1) default 0,
+    -> bno bigint,
+    -> file_size bigint,
+    -> reg_at datetime default now(),
+    -> primary key(uuid));
+    
+--2024-01-19
+mysql> create table member(
+    -> email varchar(100) not null,
+    -> pwd varchar(100) not null,
+    -> nick_name varchar(100) not null,
+    -> reg_at datetime default now(),
+    -> last_login datetime default null,
+    -> primary key(email));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table auth_member(
+    -> email varchar(100) not null,
+    -> auth varchar(50) not null);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> alter table auth_member add constraint fk_auth foreign key(email) references member(email);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc auth_member
+    -> ;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| email | varchar(100) | NO   | MUL | NULL    |       |
+| auth  | varchar(50)  | NO   |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc member;
++------------+--------------+------+-----+-------------------+-------------------+
+| Field      | Type         | Null | Key | Default           | Extra             |
++------------+--------------+------+-----+-------------------+-------------------+
+| email      | varchar(100) | NO   | PRI | NULL              |                   |
+| pwd        | varchar(100) | NO   |     | NULL              |                   |
+| nick_name  | varchar(100) | NO   |     | NULL              |                   |
+| reg_at     | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| last_login | datetime     | YES  |     | NULL              |                   |
++------------+--------------+------+-----+-------------------+-------------------+
+5 rows in set (0.00 sec)

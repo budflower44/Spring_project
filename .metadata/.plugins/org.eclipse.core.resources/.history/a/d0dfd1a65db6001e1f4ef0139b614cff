@@ -1,0 +1,22 @@
+package com.myweb.www.handler;
+
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.stereotype.Component;
+
+import com.myweb.www.repository.FileDAO;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@EnableScheduling
+@Component
+@RequiredArgsConstructor
+@Slf4j
+public class FileSweeper {
+	
+	private final String BASE_PATH = "/Users/dkraika44/Spring/image";
+	
+	private final FileDAO fdao;
+	
+	
+}

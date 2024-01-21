@@ -1,0 +1,28 @@
+package com.myweb.www.repository;
+
+import java.util.List;
+
+import com.myweb.www.domain.BoardDTO;
+import com.myweb.www.domain.BoardVO;
+import com.myweb.www.domain.PagingVO;
+
+public interface BoardDAO {
+
+	void insert(BoardDTO boardDTO);
+
+	List<BoardVO> selectAll(PagingVO pgvo);
+
+	BoardVO getDetail(long bno);
+
+	int readCount(long bno);
+
+	void update(BoardVO bvo);
+
+	void delete(long bno);
+
+	int getTotalCount(PagingVO pgvo);
+
+	void updateCmtQty(PagingVO pgvo);
+
+
+}

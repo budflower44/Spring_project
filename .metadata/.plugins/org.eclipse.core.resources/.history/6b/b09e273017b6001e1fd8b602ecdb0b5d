@@ -1,0 +1,16 @@
+package com.myweb.www.handler;
+
+import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component // 사용자 클래스를 빈으로 등
+public class FileHandler {
+	
+	private final String UP_DIR = "/Users/dkraika44/Spring/image";
+	
+	
+	public List<FileVO> flist = new ArrayList<>();
+	
+}

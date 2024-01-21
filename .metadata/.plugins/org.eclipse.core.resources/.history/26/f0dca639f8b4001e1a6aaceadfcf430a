@@ -1,0 +1,41 @@
+
+<jsp:include page="../layout/header.jsp" />
+<jsp:include page="../layout/Nav.jsp" />
+<style>
+	.container{
+		height: 70%;
+	}
+</style>
+
+<div class="container">
+
+<h1>Board Register</h1>
+<br>
+
+<form action="/board/register" method="post">
+
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Title</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" value="">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Writer</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" value="">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <button class="btn btn-outline-secondary me-md-2" type="button">cancle</button>
+  <button class="btn btn-outline-secondary" type="submit">submit</button>
+</div>
+</form>
+
+
+
+
+</div>
+
+<jsp:include page="../layout/footer.jsp" />

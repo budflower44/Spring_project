@@ -1,0 +1,7 @@
+package com.myweb.www.controller;
+
+public class CommentController {
+	
+	private final CommentService bsv;
+	
+}

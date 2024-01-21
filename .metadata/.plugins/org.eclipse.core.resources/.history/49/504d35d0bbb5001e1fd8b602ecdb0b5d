@@ -1,0 +1,16 @@
+package com.myweb.www.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+
+@RequestMapping("/comment/*")
+@RequiredArgsConstructor
+@Slf4j
+public class CommentController {
+	
+	private final CommentService bsv;
+	
+}

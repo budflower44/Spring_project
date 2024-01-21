@@ -1,0 +1,42 @@
+package com.myweb.www.handler;
+
+import com.myweb.www.domain.PagingVO;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString
+@Setter
+@Getter
+public class PagingHandler {
+	
+	private int startPage;
+	private int endPage;
+	private boolean prev, next;
+	
+	private int totalCount;
+	private PagingVO pgvo;
+	
+	public PagingHandler(PagingVO pgvo, int totalCount) {
+		this.pgvo = pgvo;
+		this.totalCount = totalCount;
+		
+		//1~5, 6~10, 11~15
+		this.endPage = pgvo.getPageStart()*pgvo.getQty();
+		this.startPage = (pgvo.getPageStart()-1 * pgvo.getQty())+1;
+		
+		int realEngPage = (int)(Math.ceil(totalCount / (double)pgvo.getQty()));
+		
+		if(realEngPage < endPage) {
+			this.endPage = realEngPage;
+		}
+		
+		this.prev = this.startPage > 1;
+		this.next = this.endPage < realEngPage;
+		
+	}
+	
+	
+	
+}

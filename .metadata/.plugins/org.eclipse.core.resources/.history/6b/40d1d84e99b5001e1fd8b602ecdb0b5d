@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+
+<jsp:include page="../layout/header.jsp" />
+<jsp:include page="../layout/Nav.jsp" />
+<style>
+.container {
+	height: 70%;
+}
+</style>
+
+<div class="container">
+
+	<h1>Board Detail</h1>
+	<br>
+	
+	<form action="/board/modify" method="post">
+		<div class="mb-3">
+			<label for="exampleFormControlInput1" class="form-label"><h4>Title</h4></label>
+			<input type="text" class="form-control" name="title" id="exampleFormControlInput1" value="${bvo.title }">
+		</div>
+		<div class="mb-3">
+			<label for="exampleFormControlInput1" class="form-label"><h4>Writer</h4></label>
+			<input type="text" class="form-control" name="writer" id="exampleFormControlInput1" value="${bvo.writer }">
+		</div>
+		<div class="mb-3">
+			<label for="exampleFormControlTextarea1" class="form-label"><h4>Content</h4></label>
+			<textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3">${bvo.content }</textarea>
+		</div>
+	
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<a href="/board/list"><button class="btn btn-outline-secondary me-md-2" type="button">cancle</button></a>
+			<a href="/board/modify?bno=${bvo.bno }"><button class="btn btn-outline-primary" type="button">modify</button></a>
+		</div>
+	</form>
+
+</div>
+
+<jsp:include page="../layout/footer.jsp" />

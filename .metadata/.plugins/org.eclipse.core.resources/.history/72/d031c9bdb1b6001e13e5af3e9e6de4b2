@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
+<!-- 현재 인증한 사용자의 정보를 가져와서 해당 권한이 있는지 확인 -->
+<!-- 현재 사용자의 정보는 principal에 저장되어 있음 -->
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.mvo.email" var="authEmail" />
+	<sec:authentication property="principal.mvo.nickName" var="authNick" />
+	<sec:authentication property="principal.mvo.authList" var="auths" />
+
+	<ul class="nav justify-content-end">
+		<li class="nav-item"><a class="nav-link active"
+			aria-current="page" href="/member/login">Login</a></li>
+		<li class="nav-item"><a class="nav-link active" href="/member/register">Member Register</a></li>
+		<li class="nav-item"><a class="nav-link" href="/member/modify">${authEmail }</a></li>
+		<form action="/member/logout" method="post" id="logoutForm">
+		<li class="nav-item"><a class="nav-link disabled" aria-disabled="true">Logout</a></li>
+		 <input type="hidden" name="email" value="${authEmail }">
+		</form>
+	</ul>
+	</sec:authorize>
+		        <form action="/member/logout" method="post" id="logoutForm">
+	        	<!-- 인증된(로그인한 계정의) 이메일 -->
+	        	<input type="hidden" name="email" value="${authEmail }">
+	        </form>
+	        
